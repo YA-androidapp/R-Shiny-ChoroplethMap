@@ -96,6 +96,17 @@ server <- function(input, output, session) {
     # 欠損値(NA)を0で置換する
     data_density[is.na(data_density)] <- 0
     
+    color_pallet <-
+      # colorNumeric("Blues", domain = data_density, reverse = F) # 連続量を塗り分け
+      colorQuantile("Blues",
+                    domain = data_density,
+                    reverse = F,
+                    n = 8) # 分位数で塗り分け
+    
+    labels <- sprintf("<strong>%s</strong><br/>%5.1f",
+                      paste0(joined$MOJI),
+                      data_density) %>% lapply(htmltools::HTML)
+    
     return(cbind(shape@data$X_CODE, shape@data$Y_CODE))
   }, ignoreNULL = FALSE)
   
@@ -105,6 +116,30 @@ server <- function(input, output, session) {
                        options = providerTileOptions(noWrap = TRUE)
       ) %>%
       addMarkers(data = data_density())
+    
+    # shape %>%
+    #   leaflet() %>%
+    #   setView(lat = 35.65, lng = 139.75, zoom = 12) %>% # 初期表示
+    #   addProviderTiles(providers$CartoDB.Positron) %>% # ベースマップ
+    #   addPolygons(
+    #     fillOpacity = 0.7,
+    #     weight = 1,
+    #     color = "#666",
+    #     fillColor = ~ color_pallet(data_density),
+    #     label = labels,
+    #     labelOptions = labelOptions(
+    #       style = list("font-weight" = "normal", padding = "3px 8px"),
+    #       textsize = "15px",
+    #       direction = "auto"
+    #     )
+    #   ) %>%
+    #   # 凡例
+    #   addLegend(
+    #     "bottomright",
+    #     pal = color_pallet,
+    #     values = ~ data_density,
+    #     title = "人口100000人当たり認知件数"
+    #   )
   })
   
 }
