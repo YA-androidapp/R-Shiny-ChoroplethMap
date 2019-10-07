@@ -40,7 +40,7 @@ head(shape@data)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(# Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("人口100000人当たり認知件数"),
   
   # Sidebar with a slider input for number of bins
   sidebarLayout(

@@ -1,6 +1,6 @@
 *.csv
 *.txt
-shape/
+shape*/
 
 # History files
 .Rhistory
