@@ -3,23 +3,12 @@
 
 
 # # Packages
-# update.packages(ask = FALSE)
 
-inst <- function(x)
-{
-  if (!require(x, character.only = TRUE))
-  {
-    install.packages(x, dep = TRUE)
-    if (!require(x, character.only = TRUE))
-      stop("Package not found")
-  }
-}
-
-inst("dplyr")
-inst("httpuv")
-inst("leaflet")
-inst("rgdal")
-inst("shiny")
+library(dplyr)
+library(httpuv)
+library(leaflet)
+library(rgdal)
+library(shiny)
 
 
 

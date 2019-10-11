@@ -1,6 +1,7 @@
 *.csv
 *.txt
 shape*/
+rsconnect/
 
 # History files
 .Rhistory
